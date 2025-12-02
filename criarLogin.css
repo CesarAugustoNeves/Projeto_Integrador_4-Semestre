@@ -1,0 +1,144 @@
+/* Definição de variáveis */
+:root {
+    --primary: #3498db; /* Azul primário */
+    --primary-dark: #2980b9; /* Azul escuro primário */
+    --secondary: #2c3e50; /* Cinza/Azul escuro secundário */
+    --success: #27ae60;
+    --danger: #e74c3c;
+    --warning: #f39c12;
+    --light: #ecf0f1; /* Cinza claro */
+    --dark: #2c3e50;
+    --gray: #95a5a6;
+    --white: #ffffff;
+    --shadow: 0 6px 20px rgba(0,0,0,0.15); /* Sombra mais pronunciada */
+    --radius: 12px; /* Raio de borda ligeiramente maior */
+    --font-impact: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+    --font-default: 'Times New Roman', Times, serif; /* Fonte padrão alterada */
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: var(--font-default); /* Usando a variável para a fonte */
+    text-align: center;
+    background: linear-gradient(135deg, var(--light) 0%, #c3cfe2 100%);
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: var(--dark);
+    padding: 20px;
+}
+
+/* Estilo do Formulário */
+form {
+    padding: 30px 40px;
+    border-radius: var(--radius);
+    width: 100%;
+    max-width: 450px;
+    background-color: rgba(255, 255, 255, 0.95);
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    background-image: none;
+    transition: all 0.3s ease;
+    animation: fadeInScale 0.5s ease-out;
+}
+
+form:hover {
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.12);
+}
+
+.login-header {
+    text-align: center; 
+    margin-bottom: 25px;
+    color: var(--secondary);
+    font-size: 2em;
+    font-weight: 700;
+}
+
+/* Estilo das Labels */
+label {
+    color: var(--secondary);
+    display: block;
+    text-align: left;
+    margin-bottom: 5px;
+    margin-top: 15px;
+    font-size: 1.1em;
+    font-weight: 600;
+    /* A fonte é herdada do 'body', não precisa redefinir aqui */
+}
+
+/* Estilo dos Inputs */
+input {
+    width: 100%;
+    padding: 12px 15px;
+    border: 1px solid var(--light);
+    border-radius: 8px;
+    margin-bottom: 15px;
+    font-size: 16px;
+    transition: all 0.3s ease;
+    box-shadow: inset 0 1px 3px rgba(0,0,0,0.05);
+    font-family: var(--font-default); /* Garantindo a fonte correta */
+}
+
+input:focus {
+    outline: none;
+    border-color: var(--primary);
+    box-shadow: 0 0 0 3px rgba(52, 152, 219, 0.2), inset 0 1px 3px rgba(0,0,0,0.1);
+}
+
+/* Estilo do Botão */
+button {
+    width: 100%;
+    background-color: var(--primary);
+    color: var(--white);
+    padding: 15px 20px;
+    border: none;
+    border-radius: var(--radius);
+    cursor: pointer;
+    font-size: 1.1em;
+    font-weight: 700;
+    transition: all 0.3s ease;
+    margin-top: 20px;
+    box-shadow: 0 4px 10px rgba(255, 255, 255, 0.3);
+    font-family: var(--font-default); /* Garantindo a fonte correta */
+}
+
+button:hover {
+    background-color: var(--primary-dark);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 15px rgba(52, 152, 219, 0.4);
+}
+
+button:active {
+    transform: translateY(0);
+}
+
+/* Media Query para telas menores */
+@media (max-width: 500px) {
+    form {
+        max-width: 95%;
+        padding: 20px 25px;
+    }
+
+    .login-header {
+        font-size: 1.8em;
+    }
+
+    button {
+        padding: 12px 15px;
+        font-size: 1em;
+    }
+}
+
+/* Animação para o formulário */
+@keyframes fadeInScale {
+    from { opacity: 0; transform: scale(0.95); }
+    to { opacity: 1; transform: scale(1); }
+}

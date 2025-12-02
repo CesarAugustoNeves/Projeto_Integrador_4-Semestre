@@ -1,0 +1,32 @@
+<!--DIA 10/10|NOME:Cesar Augusto neves|HORA INICIO: 11:06 HORA FINAL DO DIA:11:30-->
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>Cadastrar Login - Mercado autonomo</title>
+        <link rel="stylesheet" type="text/css" href="criarLogin.css">
+        <script src="criarLogin.js" type="text/javascript" defer></script>
+    </head>
+    <body>
+        <div class="backgroud-image"></div>
+        <form id="loginForm">           
+            <h1 class="login-header">Cadastrar Login</h1> 
+
+            <label for="cpf">CPF:</label> <!--Coloca CPF-->
+            <input type="text" id="cpf" name="cpf" required maxlength="14">
+
+            <label for="Nome">Nome:</label> <!--Coloca Nome-->
+            <input type="text" id="nome" name="nome" required>
+
+            <label for="email">E-mail:</label> <!--Coloca Email-->
+            <input type="email" id="email" name="email" required>
+
+            <label for="password">Senha:</label> <!--Coloca Senha-->
+            <input type="password" id="password" name="password" required>
+            
+            <button type="submit">Cadastrar Login</button>
+            <p>Já possuí uma conta? <a href="telaLogin.html" class="botao-voltar-telaLogin">Ir para área de login</a></p>
+        </form>
+    </body>
+
+</html>
