@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Área Gerencial - Mercado Autônomo</title>
+    <link rel="stylesheet" type="text/css" href="Gerente.css">
+    <script src="Gerente.js" type="text/javascript" defer></script>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1><i class="fas fa-chart-line"></i> Mercado Autônomo</h1>
+            <p class="header-subtitle">Área Gerencial - Dashboard Administrativo</p>
+        </header>
+        
+        <div class="main-content">
+            <section class="dashboard-section">
+                <h2><i class="fas fa-tachometer-alt"></i> Dashboard</h2>
+                
+                <div class="dashboard-cards">
+                    <div class="dashboard-card">
+                        <i class="fas fa-shopping-cart"></i>
+                        <h3>Vendas Hoje</h3>
+                        <p>R$ 1.245,80</p>
+                    </div>
+                    
+                    <div class="dashboard-card">
+                        <i class="fas fa-boxes"></i>
+                        <h3>Produtos em Estoque</h3>
+                        <p>1.248</p>
+                    </div>
+                    
+                    <div class="dashboard-card">
+                        <i class="fas fa-users"></i>
+                        <h3>Clientes Ativos</h3>
+                        <p>342</p>
+                    </div>
+                    
+                    <div class="dashboard-card">
+                        <i class="fas fa-chart-bar"></i>
+                        <h3>Vendas do Mês</h3>
+                        <p>R$ 28.560,40</p>
+                    </div>
+                </div>
+                
+                <div class="tabs">
+                    <div class="tab active" data-tab="sales">Vendas por Cliente</div>
+                    <div class="tab" data-tab="inventory">Gerenciar Estoque</div>
+                    <div class="tab" data-tab="products">Cadastrar Produtos</div>
+                </div>
+                
+                <!-- Aba de Vendas por Cliente -->
+                <div class="tab-content active" id="sales-tab">
+                    <h3><i class="fas fa-user-check"></i> Relatório de Vendas por Cliente</h3>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Cliente</th>
+                                <th>E-mail</th>
+                                <th>Última Compra</th>
+                                <th>Valor Total</th>
+                                <th>Detalhes</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>João Silva</td>
+                                <td>joao.silva@email.com</td>
+                                <td>15/10/2024</td>
+                                <td>R$ 142,50</td>
+                                <td><button class="btn-details"><i class="fas fa-eye"></i> Ver</button></td>
+                            </tr>
+                            <tr>
+                                <td>Maria Santos</td>
+                                <td>maria.santos@email.com</td>
+                                <td>14/10/2024</td>
+                                <td>R$ 89,90</td>
+                                <td><button class="btn-details"><i class="fas fa-eye"></i> Ver</button></td>
+                            </tr>
+                            <tr>
+                                <td>Carlos Oliveira</td>
+                                <td>carlos.oliveira@email.com</td>
+                                <td>13/10/2024</td>
+                                <td>R$ 215,30</td>
+                                <td><button class="btn-details"><i class="fas fa-eye"></i> Ver</button></td>
+                            </tr>
+                            <tr>
+                                <td>Ana Costa</td>
+                                <td>ana.costa@email.com</td>
+                                <td>12/10/2024</td>
+                                <td>R$ 76,80</td>
+                                <td><button class="btn-details"><i class="fas fa-eye"></i> Ver</button></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                
+                <!-- Aba de Gerenciar Estoque -->
+                <div class="tab-content" id="inventory-tab">
+                    <h3><i class="fas fa-boxes"></i> Gerenciamento de Estoque</h3>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Produto</th>
+                                <th>Código</th>
+                                <th>Preço</th>
+                                <th>Estoque</th>
+                                <th>Ações</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Arroz 5kg</td>
+                                <td>123456</td>
+                                <td>R$ 25,90</td>
+                                <td>42</td>
+                                <td>
+                                    <button class="btn-edit"><i class="fas fa-edit"></i></button>
+                                    <button class="btn-danger"><i class="fas fa-trash"></i></button>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Feijão 1kg</td>
+                                <td>789012</td>
+                                <td>R$ 8,50</td>
+                                <td>67</td>
+                                <td>
+                                    <button class="btn-edit"><i class="fas fa-edit"></i></button>
+                                    <button class="btn-danger"><i class="fas fa-trash"></i></button>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Óleo de Soja 900ml</td>
+                                <td>345678</td>
+                                <td>R$ 7,80</td>
+                                <td>23</td>
+                                <td>
+                                    <button class="btn-edit"><i class="fas fa-edit"></i></button>
+                                    <button class="btn-danger"><i class="fas fa-trash"></i></button>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Café 500g</td>
+                                <td>901234</td>
+                                <td>R$ 12,90</td>
+                                <td>38</td>
+                                <td>
+                                    <button class="btn-edit"><i class="fas fa-edit"></i></button>
+                                    <button class="btn-danger"><i class="fas fa-trash"></i></button>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                
+                <!-- Aba de Cadastrar Produtos -->
+                <div class="tab-content" id="products-tab">
+                    <h3><i class="fas fa-plus-circle"></i> Cadastrar Novo Produto</h3>
+                    <form id="productForm">
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="productName">Nome do Produto</label>
+                                <input type="text" id="productName" placeholder="Ex: Arroz 5kg" required>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="productCode">Código do Produto</label>
+                                <input type="text" id="productCode" placeholder="Ex: 123456" required>
+                            </div>
+                        </div>
+                        
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="productPrice">Preço (R$)</label>
+                                <input type="number" id="productPrice" step="0.01" placeholder="Ex: 25.90" required>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="productStock">Quantidade em Estoque</label>
+                                <input type="number" id="productStock" placeholder="Ex: 50" required>
+                            </div>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="productCategory">Categoria</label>
+                            <select id="productCategory" required>
+                                <option value="">Selecione uma categoria</option>
+                                <option value="alimentos">Alimentos</option>
+                                <option value="bebidas">Bebidas</option>
+                                <option value="limpeza">Limpeza</option>
+                                <option value="higiene">Higiene Pessoal</option>
+                                <option value="outros">Outros</option>
+                            </select>
+                        </div>
+                        
+                        <button type="submit" class="btn-success">
+                            <i class="fas fa-save"></i> Cadastrar Produto
+                        </button>
+                    </form>
+                </div>
+            </section>
+            
+            <div class="action-buttons">
+                <button class="logout-btn" id="logoutBtn">
+                    <i class="fas fa-sign-out-alt"></i> Sair
+                </button>
+                <button class="btn-success" id="exportBtn">
+                    <i class="fas fa-file-export"></i> Exportar Relatórios
+                </button>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
