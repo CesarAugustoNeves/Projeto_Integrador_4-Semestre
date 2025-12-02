@@ -17,14 +17,17 @@ public class Usuario {
     // Campos do formulário de cadastro:
     private String email;
     private String senha; 
+    private String nome;
 
     // Construtor vazio (obrigatório pelo JPA)
     public Usuario() {}
 
     // Construtor 
-    public Usuario(String email, String senha) {
+    public Usuario(String email, String senha, String cpf, String nome) {
         this.email = email;
         this.senha = senha;
+        this.cpf = cpf;
+        this.nome = nome;
     }
 
     // --- GETTERS E SETTERS ---
@@ -36,4 +39,7 @@ public class Usuario {
 
     public String getSenha() { return senha; }
     public void setSenha(String senha) { this.senha = senha; }
+
+    public String getNome() { return nome; }
+    public void setNome(String nome) { this.nome = nome; }
 }
