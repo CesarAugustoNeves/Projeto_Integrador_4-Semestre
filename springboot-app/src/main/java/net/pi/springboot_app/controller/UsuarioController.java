@@ -92,7 +92,7 @@ public class UsuarioController {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Erro: Nome inválido (não pode conter números ou ser vazio).");
         }
 
-        if (usuario.getCPF() == null || !validarCPF(usuario.getCPF())) {
+        if (usuario.getCpf() == null || !validarCPF(usuario.getCpf())) {
             // Retorna 400 Bad Request se o CPF for inválido
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST); 
         }
