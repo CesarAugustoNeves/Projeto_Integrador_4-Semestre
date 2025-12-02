@@ -1,0 +1,214 @@
+<!--DIA [16/10/2025]|NOME:[Alex Torres]|HORA INICIO: [14:00] HORA FINAL DO DIA:[16:30] -->
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pagamento - Mercado Autônomo</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" type="text/css" href="telaPagamento.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1><i class="fas fa-shopping-cart"></i> Mercado Autônomo</h1>
+            <p class="header-subtitle">Sistema de Autoatendimento - Finalizar Pagamento</p>
+        </header>
+        
+        <div class="main-content">
+            <!-- Resumo do Pedido -->
+            <section class="order-summary">
+                <h2><i class="fas fa-receipt"></i> Resumo do Pedido</h2>
+                
+                <div class="order-items">
+                    <div class="order-item">
+                        <div class="item-details">
+                            <div class="item-name">Arroz 5kg</div>
+                            <div class="item-quantity-price">
+                                <span>2 unidades</span>
+                                <span>R$ 25,90 cada</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="order-item">
+                        <div class="item-details">
+                            <div class="item-name">Feijão 1kg</div>
+                            <div class="item-quantity-price">
+                                <span>1 unidade</span>
+                                <span>R$ 8,50 cada</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="order-item">
+                        <div class="item-details">
+                            <div class="item-name">Óleo de Soja 900ml</div>
+                            <div class="item-quantity-price">
+                                <span>1 unidade</span>
+                                <span>R$ 7,80 cada</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="order-item">
+                        <div class="item-details">
+                            <div class="item-name">Café 500g</div>
+                            <div class="item-quantity-price">
+                                <span>1 unidade</span>
+                                <span>R$ 12,90 cada</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="order-total">
+                    Total do Pedido: R$ <span id="orderTotal">80,10</span>
+                </div>
+                
+                <div class="order-info">
+                    <p><i class="fas fa-store"></i> <strong>Mercado Autônomo</strong></p>
+                    <p><i class="fas fa-clock"></i> Data: 13/10/2024 - 16:45</p>
+                    <p><i class="fas fa-barcode"></i> Nº do Pedido: #123456</p>
+                </div>
+            </section>
+            
+            <!-- Seção de Pagamento -->
+            <section class="payment-section">
+                <h2><i class="fas fa-credit-card"></i> Forma de Pagamento</h2>
+                
+                <div class="payment-methods">
+                    <!-- PIX -->
+                    <div class="payment-option selected" data-method="pix">
+                        <div class="payment-icon">
+                            <i class="fab fa-pix"></i>
+                        </div>
+                        <div class="payment-details">
+                            <div class="payment-title">PIX</div>
+                            <div class="payment-description">Pagamento instantâneo e seguro</div>
+                        </div>
+                    </div>
+                    
+                    <!-- Cartão de Crédito -->
+                    <div class="payment-option" data-method="credit">
+                        <div class="payment-icon">
+                            <i class="far fa-credit-card"></i>
+                        </div>
+                        <div class="payment-details">
+                            <div class="payment-title">Cartão de Crédito</div>
+                            <div class="payment-description">Parcelamento em até 12x</div>
+                        </div>
+                    </div>
+                    
+                    <!-- Cartão de Débito -->
+                    <div class="payment-option" data-method="debit">
+                        <div class="payment-icon">
+                            <i class="fas fa-credit-card"></i>
+                        </div>
+                        <div class="payment-details">
+                            <div class="payment-title">Cartão de Débito</div>
+                            <div class="payment-description">Pagamento à vista</div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Formulário PIX (ativo por padrão) -->
+                <div class="payment-form active" id="pix-form">
+                    <div class="qr-code-container">
+                        <div class="qr-code-placeholder">
+                            <i class="fas fa-qrcode"></i>
+                        </div>
+                        <p><strong>QR Code para pagamento</strong></p>
+                        <p>Escaneie com seu app bancário</p>
+                    </div>
+                    
+                    <div class="pix-instructions">
+                        <h3><i class="fas fa-info-circle"></i> Como pagar com PIX:</h3>
+                        <ol>
+                            <li>Abra o app do seu banco</li>
+                            <li>Selecione a opção PIX</li>
+                            <li>Escaneie o QR Code acima</li>
+                            <li>Confirme o pagamento</li>
+                        </ol>
+                    </div>
+                
+                <!-- Formulário Cartão de Crédito -->
+                <div class="payment-form" id="credit-form">
+                    <div class="form-group">
+                        <label for="creditNumber">Número do Cartão</label>
+                        <input type="text" id="creditNumber" placeholder="0000 0000 0000 0000" maxlength="19">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="creditName">Nome no Cartão</label>
+                        <input type="text" id="creditName" placeholder="Como está no cartão">
+                    </div>
+                    
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="creditExpiry">Validade</label>
+                            <input type="text" id="creditExpiry" placeholder="MM/AA" maxlength="5">
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="creditCVV">CVV</label>
+                            <input type="text" id="creditCVV" placeholder="000" maxlength="3">
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="creditInstallments">Parcelas</label>
+                        <select id="creditInstallments">
+                            <option value="1">1x de R$ 80,10 (sem juros)</option>
+                            <option value="2">2x de R$ 40,05 (sem juros)</option>
+                            <option value="3">3x de R$ 26,70 (sem juros)</option>
+                            <option value="4">4x de R$ 20,03 (sem juros)</option>
+                        </select>
+                    </div>
+                </div>
+                
+                <!-- Formulário Cartão de Débito -->
+                <div class="payment-form" id="debit-form">
+                    <div class="form-group">
+                        <label for="debitNumber">Número do Cartão</label>
+                        <input type="text" id="debitNumber" placeholder="0000 0000 0000 0000" maxlength="19">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="debitName">Nome no Cartão</label>
+                        <input type="text" id="debitName" placeholder="Como está no cartão">
+                    </div>
+                    
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="debitExpiry">Validade</label>
+                            <input type="text" id="debitExpiry" placeholder="MM/AA" maxlength="5">
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="debitCVV">CVV</label>
+                            <input type="text" id="debitCVV" placeholder="000" maxlength="3">
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="debitPassword">Senha</label>
+                        <input type="password" id="debitPassword" placeholder="Digite sua senha" maxlength="6">
+                    </div>
+                </div>
+                
+                <div class="action-buttons">
+                    <button class="back-btn" id="backBtn">
+                        <i class="fas fa-arrow-left"></i> Voltar ao Carrinho
+                    </button>
+                    <button class="confirm-payment-btn" id="confirmPaymentBtn">
+                        <i class="fas fa-check-circle"></i> Confirmar Pagamento
+                    </button>
+                </div>
+            </section>
+        </div>
+    </div>
+
+    <script src="pagamento.js"></script>
+</body>
+</html>
