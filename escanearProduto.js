@@ -1,5 +1,10 @@
 /*--DIA 13/10|NOME:Vitor Eugênio Castelano Silva|HORA INICIO: 14:00 HORA FINAL DO DIA:16:40 --*/         
         // Simulação de banco de dados de produtos
+        // DEBUG - Verificar se o script está carregando
+        console.log('=== ESCANEARPRODUTO.JS CARREGADO ===');
+        console.log('URL atual:', window.location.href);
+        console.log('localStorage atual:', localStorage.getItem('currentOrder'));
+
         const productsDatabase = {
             '123456': { name: 'Arroz 5kg', price: 25.90 },
             '789012': { name: 'Feijão 1kg', price: 8.50 },
@@ -27,6 +32,74 @@
         const checkoutBtn = document.getElementById('checkoutBtn');
         const logoutBtn = document.getElementById('logoutBtn');
         const clearHistoryBtn = document.getElementById('clearHistoryBtn');
+
+        // ============================================
+        // FUNÇÃO PARA CARREGAR CARRINHO DO LOCALSTORAGE
+        // ============================================
+        function loadCartFromStorage() {
+            console.log('=== LOADCARTFROMSTORAGE INICIANDO ===');
+            const savedOrder = localStorage.getItem('currentOrder');
+            console.log('Valor bruto do localStorage:', savedOrder);
+            
+            if (!savedOrder) {
+                console.log('AVISO: Nenhum dado encontrado no localStorage');
+                console.log('Cart será mantido como:', cart);
+                return;
+            }
+            
+            try {
+                const orderData = JSON.parse(savedOrder);
+                console.log('Dados parseados:', orderData);
+                
+                // Verificar estrutura dos dados
+                if (!orderData || typeof orderData !== 'object') {
+                    console.error('Erro: orderData não é um objeto válido');
+                    return;
+                }
+                
+                // Restaurar o carrinho
+                if (orderData.cart && Array.isArray(orderData.cart)) {
+                    console.log('Cart antes de restaurar:', cart);
+                    cart = orderData.cart;
+                    console.log('Cart depois de restaurar:', cart);
+                } else {
+                    console.warn('AVISO: orderData.cart não encontrado ou não é array');
+                }
+                
+                // Restaurar histórico
+                if (orderData.scanHistory && Array.isArray(orderData.scanHistory)) {
+                    scanHistory = orderData.scanHistory;
+                    console.log('Histórico restaurado:', scanHistory);
+                }
+                
+            } catch (error) {
+                console.error('ERRO CRÍTICO ao carregar do localStorage:', error);
+                console.error('String problemática:', savedOrder);
+            }
+        }
+        function saveCartToStorage() {
+            console.log('=== SAVECARTTOSTORAGE CHAMADA ===');
+            
+            // Calcular o total do carrinho
+            const total = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
+
+            // Criar objeto com dados do pedido
+            const orderData = {
+                cart: cart,
+                scanHistory: scanHistory,
+                total: total,
+                orderId: '#' + Date.now(),
+                date: new Date().toLocaleString('pt-BR')
+            };
+            
+            console.log('Salvando no localStorage:', orderData);
+            localStorage.setItem('currentOrder', JSON.stringify(orderData));
+            console.log('localStorage atualizado com sucesso');
+        }
+
+        // ============================================
+        // FUNÇÕES PRINCIPAIS
+        // ============================================
 
         // Adicionar produto ao carrinho
         function addProductToCart(productCode) {
@@ -62,6 +135,8 @@
             updateCartDisplay();
             productCodeInput.value = ''; // Limpar campo de entrada
             productCodeInput.focus(); // Focar no campo de entrada
+
+            saveCartToStorage();
         }
 
         // Atualizar exibição do carrinho
@@ -170,21 +245,27 @@
                 }
                 updateCartDisplay();
             }
+            saveCartToStorage();
         }
 
         // Remover item do carrinho
         function removeFromCart(productCode) {
             cart = cart.filter(item => item.code !== productCode);
             updateCartDisplay();
+            saveCartToStorage();
         }
 
         // Limpar histórico
         function clearHistory() {
             scanHistory = [];
             updateScanHistory();
+            saveCartToStorage();
         }
 
-        // Event Listeners
+        // ============================================
+        // EVENT LISTENERS
+        // ============================================
+
         addProductBtn.addEventListener('click', () => {
             const productCode = productCodeInput.value.trim();
             if (productCode) {
@@ -208,25 +289,38 @@
         });
 
         checkoutBtn.addEventListener('click', () => {
+            console.log('=== CHECKOUT CLICADO ===');
+            console.log('Cart atual:', cart);
+            
             if (cart.length === 0) {
                 alert('Seu carrinho está vazio. Adicione produtos antes de finalizar a compra.');
                 return;
             }
-             //. Calcular o total do carrinho
+            
+            // Usar a nova função para salvar
+            saveCartToStorage();
+            
+            // Pequeno delay para garantir que o localStorage foi salvo
+            setTimeout(() => {
+                console.log('Redirecionando para pagamento...');
+                window.location.href = 'telaPagamento.html';
+            }, 100);
+
+
+            // Calcular o total do carrinho
             const total = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
 
-            //. Criar objeto com dados do pedido
+            // Criar objeto com dados do pedido
             const orderData = {
                 cart: cart, // Todos os itens do carrinho
+                scanHistory: scanHistory, // Salva o histórico também
                 total: total, // Valor total
                 orderId: '#' + Date.now(), // ID único baseado no timestamp
                 date: new Date().toLocaleString('pt-BR') // Data atual
             };
-            //Salvar no localStorage
-            localStorage.setItem('currentOrder', JSON.stringify(orderData));
             
-            //Redirecionar para a tela de pagamento
-            window.location.href = 'telaPagamento.html';
+            // Salvar no localStorage
+            localStorage.setItem('currentOrder', JSON.stringify(orderData));
             
             // Redirecionar para a tela de pagamento
             window.location.href = 'telaPagamento.html';
@@ -251,6 +345,31 @@
             }
         });
 
+        // ============================================
+        // INICIALIZAÇÃO
+        // ============================================
+
+        console.log('=== INICIALIZANDO TELA DE ESCANEAMENTO ===');
+
+        // Verificar se estamos voltando da tela de pagamento
+        const urlParams = new URLSearchParams(window.location.search);
+        const returningFromPayment = urlParams.get('returning');
+
+        if (returningFromPayment) {
+            console.log('Retornando da tela de pagamento');
+        }
+
+        // Carregar dados do localStorage ao iniciar
+        console.log('Chamando loadCartFromStorage...');
+        loadCartFromStorage();
+
         // Inicializar a tela
+        console.log('Chamando updateCartDisplay...');
         updateCartDisplay();
+
+        console.log('Chamando updateScanHistory...');
         updateScanHistory();
+
+        console.log('=== INICIALIZAÇÃO COMPLETA ===');
+        console.log('Cart final:', cart);
+        console.log('localStorage final:', localStorage.getItem('currentOrder'));

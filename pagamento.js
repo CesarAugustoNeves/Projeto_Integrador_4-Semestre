@@ -190,8 +190,8 @@ document.addEventListener('DOMContentLoaded', function() {
         
         // Perguntar se o usuário tem certeza
         if (confirm('Deseja voltar ao carrinho?\nOs itens do seu pedido serão mantidos.')) {
-            // Redirecionar de volta para a tela de escaneamento
-            window.location.href = 'escanearProduto.html';
+            // Redirecionar com parâmetro para identificar que estamos voltando
+            window.location.href = 'escanearProduto.html?returning=true';
         }
     }
     
