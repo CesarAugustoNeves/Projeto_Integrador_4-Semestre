@@ -327,14 +327,28 @@
         });
 
         logoutBtn.addEventListener('click', () => {
-            if (confirm('Tem certeza que deseja sair?')) {
-                // Redirecionar para a tela de login
-                alert('Saindo do sistema...');
-                // Em uma implementação real, aqui você redirecionaria para a página de login
-                // window.location.href = 'telaLogin.html';
+            if (confirm('Tem certeza que deseja sair do sistema?\nSeu carrinho será limpo.')) {
+                // 1. Limpar o localStorage (carrinho e histórico)
+                localStorage.removeItem('currentOrder');
+                
+                // 2. Limpar as variáveis locais
+                cart = [];
+                scanHistory = [];
+                
+                // 3. Atualizar a tela para mostrar carrinho vazio
+                updateCartDisplay();
+                updateScanHistory();
+                
+                // 4. Mostrar mensagem de feedback
+                alert('Você saiu do sistema. Redirecionando para a tela de login...');
+                
+                // 5. Redirecionar para a tela de login após 1 segundo
+                setTimeout(() => {
+                    window.location.href = 'telaLogin.html';
+                }, 1000);
             }
         });
-
+        
         clearHistoryBtn.addEventListener('click', () => {
             if (scanHistory.length > 0) {
                 if (confirm('Tem certeza que deseja limpar o histórico de escaneamentos?')) {

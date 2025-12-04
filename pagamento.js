@@ -1,4 +1,4 @@
-/*--DIA [03/12/2025]|NOME:[Alex Torres]|HORA INICIO: [13:00] HORA FINAL DO DIA:[16:00] --*/
+/*--DIA [03/12/2025]|NOME:[Alex Torres]|HORA INICIO: [14:00] HORA FINAL DO DIA:[22:00] --*/
 
 document.addEventListener('DOMContentLoaded', function() {
     console.log('Página de pagamento carregada');
