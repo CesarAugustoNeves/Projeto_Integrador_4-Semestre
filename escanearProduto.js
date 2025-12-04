@@ -77,6 +77,7 @@
                 console.error('String problemática:', savedOrder);
             }
         }
+        
         function saveCartToStorage() {
             console.log('=== SAVECARTTOSTORAGE CHAMADA ===');
             
@@ -263,6 +264,54 @@
         }
 
         // ============================================
+        // FUNÇÃO PARA ADICIONAR BOTÃO DE ADMINISTRADOR
+        // ============================================
+        function checkAdminAccess() {
+            const isAdmin = localStorage.getItem('isAdmin') === 'true';
+            const adminLoggedIn = localStorage.getItem('adminLoggedIn') === 'true';
+            
+            if (isAdmin && adminLoggedIn) {
+                // Verificar se o botão já existe
+                const existingAdminBtn = document.querySelector('.admin-access-btn');
+                if (existingAdminBtn) return;
+                
+                // Adiciona botão de acesso à área administrativa
+                const adminAccessBtn = document.createElement('button');
+                adminAccessBtn.className = 'admin-access-btn';
+                adminAccessBtn.innerHTML = '<i class="fas fa-user-shield"></i> Área Gerencial';
+                adminAccessBtn.style.backgroundColor = '#f39c12';
+                adminAccessBtn.style.marginTop = '10px';
+                adminAccessBtn.addEventListener('click', () => {
+                    window.location.href = 'Gerente.html';
+                });
+                
+                // Adiciona ao action-buttons
+                const actionButtons = document.querySelector('.action-buttons');
+                if (actionButtons) {
+                    actionButtons.appendChild(adminAccessBtn);
+                }
+                
+                // Adicionar estilo CSS
+                const style = document.createElement('style');
+                style.textContent = `
+                    .admin-access-btn {
+                        background-color: #f39c12 !important;
+                        padding: 12px 20px !important;
+                        border-radius: 8px !important;
+                        color: white !important;
+                        font-weight: 600 !important;
+                        transition: all 0.3s ease !important;
+                    }
+                    .admin-access-btn:hover {
+                        background-color: #d68910 !important;
+                        transform: translateY(-2px) !important;
+                    }
+                `;
+                document.head.appendChild(style);
+            }
+        }
+
+        // ============================================
         // EVENT LISTENERS
         // ============================================
 
@@ -330,6 +379,8 @@
             if (confirm('Tem certeza que deseja sair do sistema?\nSeu carrinho será limpo.')) {
                 // 1. Limpar o localStorage (carrinho e histórico)
                 localStorage.removeItem('currentOrder');
+                localStorage.removeItem('isAdmin');
+                localStorage.removeItem('adminLoggedIn');
                 
                 // 2. Limpar as variáveis locais
                 cart = [];
@@ -383,6 +434,10 @@
 
         console.log('Chamando updateScanHistory...');
         updateScanHistory();
+
+        // Verificar se é admin e adicionar botão se for
+        console.log('Verificando acesso de administrador...');
+        checkAdminAccess();
 
         console.log('=== INICIALIZAÇÃO COMPLETA ===');
         console.log('Cart final:', cart);
