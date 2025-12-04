@@ -447,3 +447,24 @@
         .cart-section::-webkit-scrollbar-thumb:hover {
             background: var(--primary-dark);
         }
+
+        /* Estilo para o botão de acesso administrativo */
+.admin-access-btn {
+    background-color: #f39c12 !important;
+    padding: 12px 20px !important;
+    border-radius: 8px !important;
+    color: white !important;
+    font-weight: 600 !important;
+    transition: all 0.3s ease !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    gap: 8px !important;
+    margin-top: 10px !important;
+}
+
+.admin-access-btn:hover {
+    background-color: #d68910 !important;
+    transform: translateY(-2px) !important;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.15) !important;
+}
