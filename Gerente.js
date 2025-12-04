@@ -1,4 +1,21 @@
 document.addEventListener('DOMContentLoaded', function() {
+    // ============================================
+    // VERIFICAÇÃO DE SEGURANÇA - APENAS ADMINISTRADOR
+    // ============================================
+    const isAdmin = localStorage.getItem('isAdmin') === 'true';
+    const adminLoggedIn = localStorage.getItem('adminLoggedIn') === 'true';
+    
+    if (!isAdmin || !adminLoggedIn) {
+        alert('Acesso negado! Esta área é restrita a administradores.');
+        // Redireciona para a tela de login
+        window.location.href = 'telaLogin.html';
+        return;
+    }
+    
+    // ============================================
+    // RESTO DO CÓDIGO EXISTENTE...
+    // ============================================
+    
     // Elementos da interface
     const tabs = document.querySelectorAll('.tab');
     const tabContents = document.querySelectorAll('.tab-content');
@@ -273,12 +290,18 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     }
 
-    // Logout
+    // Logout - MODIFICADO PARA LIMPAR DADOS DE ADMIN
     function fazerLogout() {
         if (confirm('Tem certeza que deseja sair da área gerencial?')) {
+            // Limpar dados de administrador
+            localStorage.removeItem('isAdmin');
+            localStorage.removeItem('adminLoggedIn');
+            
             // Limpar dados de sessão/localStorage se necessário
             localStorage.removeItem('gerenteToken');
             sessionStorage.removeItem('gerenteLogado');
+            
+            // Redirecionar para tela de login
             window.location.href = 'telaLogin.html';
         }
     }
