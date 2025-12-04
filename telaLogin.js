@@ -1,4 +1,6 @@
 // Criado por Enryco
+// MODIFICADO PARA SUPORTAR LOGIN DE ADMINISTRADOR
+
 const form = document.getElementById('loginForm');
 
 form.addEventListener('submit', (e) => {
@@ -8,16 +10,30 @@ form.addEventListener('submit', (e) => {
     const email = document.getElementById('email').value;
     const password = document.getElementById('password').value;
 
-    // 2. Objeto JSON a ser enviado (os nomes das chaves devem ser iguais aos da Entidade Java)
+    // 2. VERIFICAÇÃO DE ADMINISTRADOR
+    if (email === 'administrador@gmail.com' && password === 'ADM12345') {
+        console.log('Login de administrador detectado!');
+        alert('Login administrativo realizado com sucesso!');
+        
+        // Salva informação de que é admin no localStorage
+        localStorage.setItem('isAdmin', 'true');
+        localStorage.setItem('adminLoggedIn', 'true');
+        
+        // Redireciona para a área gerencial
+        window.location.href = 'Gerente.html';
+        return;
+    }
+
+    // 3. Se não for admin, procede com login normal
     const credenciais = {
         email: email,
         senha: password 
     };
 
-    // 3. Define o endpoint de LOGIN
+    // 4. Define o endpoint de LOGIN
     const url = 'http://localhost:8081/api/usuarios/login';
 
-    // 4. Faz a requisição POST para o servidor
+    // 5. Faz a requisição POST para o servidor
     fetch(url, {
         method: 'POST', 
         headers: {
@@ -28,6 +44,9 @@ form.addEventListener('submit', (e) => {
     .then(response => {
         if (response.status === 200) {
             // SUCESSO! O servidor retornou OK (200)
+            // Garante que não é admin para login normal
+            localStorage.removeItem('isAdmin');
+            localStorage.removeItem('adminLoggedIn');
             return response.json(); 
         } else if (response.status === 401) {
             // FALHA! O servidor retornou Não Autorizado (401)
