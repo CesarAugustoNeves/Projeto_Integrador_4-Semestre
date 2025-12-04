@@ -22,7 +22,6 @@ document.addEventListener('DOMContentLoaded', function() {
     // Elementos DOM
     const productCodeInput = document.getElementById('productCode');
     const addProductBtn = document.getElementById('addProductBtn');
-    const startCameraBtn = document.getElementById('startCameraBtn');
     const cartItemsContainer = document.getElementById('cartItems');
     const totalAmountElement = document.getElementById('totalAmount');
     const scanHistoryContainer = document.getElementById('scanHistory');
@@ -337,10 +336,6 @@ document.addEventListener('DOMContentLoaded', function() {
                 addProductToCart(productCode);
             }
         }
-    });
-
-    startCameraBtn.addEventListener('click', () => {
-        alert('A câmera requer HTTPS ou localhost seguro. Para testes, use a entrada manual.');
     });
 
     checkoutBtn.addEventListener('click', () => {
